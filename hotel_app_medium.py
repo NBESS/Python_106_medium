@@ -63,7 +63,7 @@ hotel3 = {
     '105': {},
 }
 
-hotel = [hotel1, hotel2, hotel3]
+hotels = [hotel1, hotel2, hotel3]
 
 main_menu = '''
 
@@ -74,52 +74,59 @@ main_menu = '''
 
 '''
 
-# Creates a function that checks if a room is vacant
-def is_vacant(which_hotel, room_number):
-    if which_hotel[room_number] != {}:
-        return f'Room {room_number} is vacant.' 
+for key in range(len(hotels)):
+    
+    if 'guest' in hotels[key] == True:
+        print('there is a guest') 
 
-    else:
-        return f'Room {room_number} is occupied'
+    print(hotels[key])
+#
 
-# Defines a function that adds a guest to a specific room
-def check_in(which_hotel, room_number, guest_dictionary):
-    which_hotel[room_number]['guest'] = guest_dictionary
+# # Creates a function that checks if a room is vacant
+# def is_vacant(which_hotel, room_number):
+#     if which_hotel[room_number] != {}:
+#         return f'Room {room_number} is vacant.' 
 
-# Defines a function that returns the guest dictionary for room number
-def check_out(which_hotel, room_number):
-    return f'{which_hotel[room_number]["guest"]}'
+#     else:
+#         return f'Room {room_number} is occupied'
+
+# # Defines a function that adds a guest to a specific room
+# def check_in(which_hotel, room_number, guest_dictionary):
+#     which_hotel[room_number]['guest'] = guest_dictionary
+
+# # Defines a function that returns the guest dictionary for room number
+# def check_out(which_hotel, room_number):
+#     return f'{which_hotel[room_number]["guest"]}'
 
 while True:
+    # Prompt for a menu option
+    menu_choice = int(input(main_menu))
+    if menu_choice == 1:
 
-    while True:
-        # Prints the hotel menu
-        print(main_menu)
+        # Print vacancies for all hotels or the names of occupants
+        for key in range(len(hotels)):
+    
+            print(hotels[key])
 
-        # Prompt for a menu option
-        if int(input('Choose a menu option: ')) == 1:
+    elif menu_choice == 2:
+    
+        # Check a customer into a hotel and room
+        # Do not allow user to check into an occupied room
 
-            # Print vacancies for all hotels or the names of occupants
-            print('1')
+        # Prompt for each piece of information
+        print('2')
+
+    elif menu_choice == 3:
+
+        # Check custom out
+        # Print whether or not the customer has paid
+        print('3')
+
         
-        elif int(input('Choose a menu option: ')) == 2:
-            
-            # Check a customer into a hotel and room
-            # Do not allow user to check into an occupied room
+    elif menu_choice == 4:
 
-            # Prompt for each piece of information
-            print('2')
-
-        elif int(input('Choose a menu option: ')) == 3:
-
-            # Check custom out
-            # Print whether or not the customer has paid
-            print('3')
-
-        else:
-
-            # Quit app
-            break
+        # Quit app
+        break
 
 print('Thank you, for using the hotel app!')    
 
