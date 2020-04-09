@@ -15,49 +15,27 @@
 # - upon check out, print out whether or not the customer has paid
 
 hotel1 = {
+    'hotel name': 'Hotel1',
     '101': {},
     '102': {},
-    '103': {
-        'guest': {
-            'name': 'Bugs Bunny',
-            'phone': '2221234',
-        }
-    },
-    '104': {
-        'guest': {
-            'name': 'Tweety Bird',
-            'phone': '2221255',
-        }
-    },
+    '103': {},
+    '104': {},
     '105': {},
 }
 
 hotel2 = {
-    '101': {
-        'guest': {
-            'name': 'Joe Montana',
-            'phone': '5551616',
-        }
-    },
+    'hotel name': 'Hotel2',
+    '101': {},
     '102': {},
     '103': {},
     '104': {},
-    '105': {
-        'guest': {
-            'name': 'Barry Sanders',
-            'phone': '5552020',
-        }
-    },
+    '105': {},
 }
 
 hotel3 = {
+    'hotel name': 'Hotel3',
     '101': {},
-    '102': {
-        'guest': {
-            'name': 'Claire Huckstable',
-            'phone': '4441234',
-        }
-    },
+    '102': {},
     '103': {},
     '104': {},
     '105': {},
@@ -74,29 +52,31 @@ main_menu = '''
 
 '''
 
-for key in range(len(hotels)):
-    
-    if 'guest' in hotels[key] == True:
-        print('there is a guest') 
+# Creates a function that checks if a room is vacant
+def is_vacant(which_hotel, room_number):
+    if which_hotel[room_number] == {}:
+        return True
 
-    print(hotels[key])
-#
+    else:
+        return False
 
-# # Creates a function that checks if a room is vacant
-# def is_vacant(which_hotel, room_number):
-#     if which_hotel[room_number] != {}:
-#         return f'Room {room_number} is vacant.' 
+# Defines a function that adds a guest to a specific room
+def check_in(which_hotel, room_number, guest_dictionary):
 
-#     else:
-#         return f'Room {room_number} is occupied'
+    # If room is occupied prompt to choose another room
+    if is_vacant(which_hotel, room_number):
+        
+        which_hotel[room_number]['guest'] = guest_dictionary
+        return which_hotel[room_number]['guest']
 
-# # Defines a function that adds a guest to a specific room
-# def check_in(which_hotel, room_number, guest_dictionary):
-#     which_hotel[room_number]['guest'] = guest_dictionary
+    else:
+
+        return f'{room_number} is occupied. Please choose a different room.'
+        
 
 # # Defines a function that returns the guest dictionary for room number
-# def check_out(which_hotel, room_number):
-#     return f'{which_hotel[room_number]["guest"]}'
+def check_out(which_hotel, room_number):
+    return f'{which_hotel[room_number]["guest"]}'
 
 while True:
     # Prompt for a menu option
@@ -114,7 +94,32 @@ while True:
         # Do not allow user to check into an occupied room
 
         # Prompt for each piece of information
-        print('2')
+        # Provide details for customer in a dictionary
+        hotel_to_check_in = input('Which Hotel would you like to check guest into? ').lower()
+        room_to_check_in =  input('Which room will the guest be staying in? ')
+
+        # Converts the string inputs for "hotel to check-in" into variables
+        if hotel_to_check_in == 'hotel1':
+            hotel_to_check_in = hotel1
+        
+        elif hotel_to_check_in == 'hotel2':
+            hotel_to_check_in = hotel2
+
+        elif hotel_to_check_in == 'hotel3':
+            hotel_to_check_in = hotel3
+
+        guest = {
+
+            'name': input("What is the guest's name? "),
+            'phone': input("What is the guest's phone number? ")
+        }
+
+        while is_vacant(hotel_to_check_in, room_to_check_in):
+            print(is_vacant(hotel_to_check_in, room_to_check_in))
+            room_to_check_in = input('Which room will the guest be staying in? ')
+            
+
+        print(check_in(hotel_to_check_in, room_to_check_in, guest))
 
     elif menu_choice == 3:
 
